@@ -3,18 +3,22 @@ package com.project.course.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_category")
 public class Category implements Serializable {
 
-    private static final long serialVerionUID = 1L;
-
+    private static final Long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    @Transient
+    private Set<Product> products = new HashSet<>();
 
     public Category() {
     }
@@ -38,7 +42,9 @@ public class Category implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-
+    public Set<Product> getProducts() {
+        return products;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -50,4 +56,6 @@ public class Category implements Serializable {
     public int hashCode() {
         return Objects.hash(getId());
     }
+
+
 }
