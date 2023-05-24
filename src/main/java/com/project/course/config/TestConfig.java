@@ -1,16 +1,12 @@
 package com.project.course.config;
 
-import com.project.course.entities.OrderItem;
-import com.project.course.entities.Category;
-import com.project.course.entities.Product;
-import com.project.course.entities.User;
+import com.project.course.entities.*;
 import com.project.course.entities.enums.OrderStatus;
 import com.project.course.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import com.project.course.entities.Order;
 
 import java.time.Instant;
 import java.util.Arrays;
@@ -77,6 +73,10 @@ public class TestConfig implements CommandLineRunner {
 
         orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 
+        Payment pay1 = new Payment(null, Instant.parse("2019-06-20T21:53:07Z"), o1);
+        o1.setPayment(pay1);
+
+        orderRepository.save(o1);
 
 
     }
